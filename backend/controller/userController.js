@@ -1,4 +1,6 @@
 const asyncHandler = require("express-async-handler");
+const bcrypt = require("bcryptjs");
+const user = require("../models/userModel");
 // @desc    Register a new user
 // @route   /api/users
 // @access  Public
@@ -9,6 +11,14 @@ const registerUser = asyncHandler(async (req, res) => {
   if (!name || !email || !password) {
     res.status(400);
     throw new Error("Please include all fields");
+  }
+
+  // Find is user already exists
+  const userExists = await user.findOne({ email });
+
+  if (userExists) {
+    res.status(400);
+    throw new Error("User already registered");
   }
 
   res.send("Register Route");
