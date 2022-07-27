@@ -21,6 +21,10 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error("User already registered");
   }
 
+  // Hash password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
   res.send("Register Route");
 });
 
