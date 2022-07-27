@@ -18,9 +18,9 @@ const registerUser = asyncHandler(async (req, res) => {
 // @desc    Login a user
 // @route   /api/users/login
 // @access  Public
-const loginUser = (req, res) => {
+const loginUser = asyncHandler(async (req, res) => {
   res.send("Login Route");
-};
+});
 
 module.exports = {
   registerUser,
